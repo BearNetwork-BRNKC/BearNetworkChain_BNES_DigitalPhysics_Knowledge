@@ -1,20 +1,31 @@
-﻿{
+{
   "version": 2,
-  "buildCommand": "pnpm vercel-build",
-  "outputDirectory": "dist/public",
   "framework": "vite",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist/public",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api"
-    },
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [
@@ -23,23 +34,12 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    },
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
-        }
-      ]
+      "destination": "/index.html"
     }
   ]
 }
