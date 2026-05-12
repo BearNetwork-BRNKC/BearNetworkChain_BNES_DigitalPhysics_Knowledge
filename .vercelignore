@@ -1,0 +1,7 @@
+# Vercel ignore rules
+.git
+.gitignore
+README.md
+docs/
+.env.example
+server/index.ts
