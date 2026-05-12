@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Search, Menu, X, ChevronRight, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { searchContentInArray } from "@/lib/content";
+import { searchContentInArray, Section, Subsection } from "@/lib/content";
 import ContentDisplay from "@/components/ContentDisplay";
 import Sidebar from "@/components/Sidebar";
 import { useI18n } from "@/contexts/I18nContext";
@@ -26,7 +26,17 @@ export default function Home() {
   }, [searchQuery, localizedContent]);
 
   const currentSection = useMemo(() => {
-    return searchResults.find((s) => s.id === selectedSection) || searchResults[0];
+    const findById = (sections: Section[], id: string): Section | Subsection | undefined => {
+      for (const section of sections) {
+        if (section.id === id) return section;
+        if (section.subsections) {
+          const sub = section.subsections.find((s) => s.id === id);
+          if (sub) return sub;
+        }
+      }
+      return undefined;
+    };
+    return findById(searchResults, selectedSection) || searchResults[0];
   }, [selectedSection, searchResults]);
 
   const toggleLanguage = () => {

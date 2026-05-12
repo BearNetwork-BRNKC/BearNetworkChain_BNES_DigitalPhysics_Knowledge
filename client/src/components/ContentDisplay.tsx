@@ -44,6 +44,42 @@ function TableDisplay({ table }: { table: Table }) {
   );
 }
 
+function parseMarkdownLinks(text: string) {
+  const parts = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    // Append text before the match
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+
+    // Append the link component
+    parts.push(
+      <a
+        key={match.index}
+        href={match[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+      >
+        {match[1]}
+      </a>
+    );
+
+    lastIndex = regex.lastIndex;
+  }
+
+  // Append remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
 function ContentText({ text }: { text: string }) {
   const lines = text.split("\n");
   return (
@@ -80,7 +116,7 @@ function ContentText({ text }: { text: string }) {
         // Regular paragraph
         return (
           <p key={idx} className="text-slate-700 dark:text-slate-300 leading-relaxed">
-            {line}
+            {parseMarkdownLinks(line)}
           </p>
         );
       })}
