@@ -1,5 +1,6 @@
 import { Section, Subsection, Table } from "@/lib/content";
 import { Separator } from "@/components/ui/separator";
+import { useI18n } from "@/contexts/I18nContext";
 
 interface ContentDisplayProps {
   section: Section | Subsection;
@@ -88,7 +89,7 @@ function ContentText({ text }: { text: string }) {
 }
 
 export default function ContentDisplay({ section }: ContentDisplayProps) {
-  const isSubsection = !("subsections" in section);
+  const { t } = useI18n();
 
   return (
     <div className="max-w-4xl mx-auto p-6 md:p-8">
@@ -132,16 +133,16 @@ export default function ContentDisplay({ section }: ContentDisplayProps) {
       {/* Footer */}
       <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          本知識庫基於 BearNetworkChain 官方技術文檔生成。
+          {t('footer.source')}
           <br />
-          更多信息請訪問{" "}
+          {t('footer.more')}{" "}
           <a
             href="https://github.com/BearNetwork-BRNKC/BearNetworkChain-Physics-Engine-Canonical-Definition"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            GitHub 儲存庫
+            {t('footer.github')}
           </a>
         </p>
       </div>

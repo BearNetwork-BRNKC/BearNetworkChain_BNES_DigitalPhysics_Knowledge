@@ -1,26 +1,37 @@
 import { useState, useMemo } from "react";
-import { Search, Menu, X, ChevronRight } from "lucide-react";
+import { Search, Menu, X, ChevronRight, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { knowledgeContent, searchContent, Section } from "@/lib/content";
+import { searchContentInArray } from "@/lib/content";
 import ContentDisplay from "@/components/ContentDisplay";
 import Sidebar from "@/components/Sidebar";
+import { useI18n } from "@/contexts/I18nContext";
+import { content as contentStore } from "@/i18n";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSection, setSelectedSection] = useState<string>("overview");
+  const { t, locale, setLocale } = useI18n();
+
+  const localizedContent = useMemo(() => {
+    return contentStore[locale];
+  }, [locale]);
 
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) {
-      return knowledgeContent;
+      return localizedContent;
     }
-    return searchContent(searchQuery);
-  }, [searchQuery]);
+    return searchContentInArray(searchQuery, localizedContent);
+  }, [searchQuery, localizedContent]);
 
   const currentSection = useMemo(() => {
     return searchResults.find((s) => s.id === selectedSection) || searchResults[0];
   }, [selectedSection, searchResults]);
+
+  const toggleLanguage = () => {
+    setLocale(locale === "zh-TW" ? "en" : "zh-TW");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
@@ -40,10 +51,10 @@ export default function Home() {
             </button>
             <div className="flex flex-col">
               <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-400 dark:to-blue-500 bg-clip-text text-transparent">
-                BearNetworkChain
+                {t('app.title')}
               </h1>
               <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                Γ 物理引擎知識庫
+                {t('app.subtitle')}
               </p>
             </div>
           </div>
@@ -54,7 +65,7 @@ export default function Home() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <Input
                 type="text"
-                placeholder="搜尋內容..."
+                placeholder={t('search.placeholder')}
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -65,16 +76,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* GitHub Link */}
-          <a
-            href="https://github.com/BearNetwork-BRNKC/BearNetworkChain-Physics-Engine-Canonical-Definition"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-          >
-            GitHub
-            <ChevronRight className="w-4 h-4" />
-          </a>
+          {/* Nav Links */}
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              <Languages className="w-4 h-4" />
+              <span className="hidden sm:inline">{t('lang.switch')}</span>
+            </Button>
+
+            {/* GitHub Link */}
+            <a
+              href="https://github.com/BearNetwork-BRNKC/BearNetworkChain-Physics-Engine-Canonical-Definition"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              {t('nav.github')}
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
 
         {/* Mobile Search */}
@@ -83,7 +108,7 @@ export default function Home() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <Input
               type="text"
-              placeholder="搜尋內容..."
+              placeholder={t('search.placeholder')}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -117,7 +142,7 @@ export default function Home() {
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
                 <p className="text-slate-600 dark:text-slate-400 mb-4">
-                  沒有找到相符的內容
+                  {t('content.noResult')}
                 </p>
                 <Button
                   onClick={() => {
@@ -126,7 +151,7 @@ export default function Home() {
                   }}
                   variant="outline"
                 >
-                  清除搜尋
+                  {t('content.clearSearch')}
                 </Button>
               </div>
             </div>
