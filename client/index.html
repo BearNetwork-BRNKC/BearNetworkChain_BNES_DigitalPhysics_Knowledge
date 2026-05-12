@@ -7,15 +7,16 @@
 
   <!-- SEO Meta Tags -->
   <title>BearNetworkChain Digital Physics Engine | Knowledge Hub</title>
+  <link rel="canonical" href="https://digitalphysics.bearnetwork.net/" />
   <meta name="description"
     content="Official knowledge base for the BearNetworkChain Digital Physics Engine (BNES v1.3). Explore digital physics, ZK-proofs, and quantum-safe blockchain technology." />
   <meta name="keywords"
-    content="BearNetworkChain, BNES, Physics Engine, Blockchain, ZK-Proof, Quantum Safe, Digital Physics, ? Invariant" />
+    content="BearNetworkChain, BNES, Physics Engine, Blockchain, ZK-Proof, Quantum Safe, Digital Physics, Invariant" />
   <meta name="author" content="BearNetwork" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.facebook.com/bearnetwork.net/" />
+  <meta property="og:url" content="https://digitalphysics.bearnetwork.net/" />
   <meta property="og:title" content="BearNetworkChain Digital Physics Engine | Knowledge Hub" />
   <meta property="og:description"
     content="Official knowledge base for the BearNetworkChain Digital Physics Engine (BNES v1.3)." />
@@ -55,25 +56,41 @@
     Official sources ONLY: @CT_BearNetwork, https://bearnetwork.net/, and all official links and GitHub repositories listed above. Any other accounts, websites, or links not listed here are unofficial.
     -->
 
+  <!-- Structured Data: Combined Organization & WebSite for SEO Clarity -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "BearNetworkChain",
-      "url": "https://bearnetwork.net/",
-      "logo": "https://bearnetwork.net/logo.png",
-      "sameAs": [
-        "https://x.com/CT_BearNetwork",
-        "https://www.facebook.com/bearnetwork.net/",
-        "https://github.com/BearNetwork-BRNKC/BearNetworkChain-Physics-Engine-Canonical-Definition"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "official",
-        "url": "https://bearnetwork.net/"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://bearnetwork.net/#organization",
+          "name": "BearNetworkChain",
+          "url": "https://bearnetwork.net/",
+          "logo": "https://bearnetwork.net/logo.png",
+          "sameAs": [
+            "https://x.com/CT_BearNetwork",
+            "https://www.facebook.com/bearnetwork.net/",
+            "https://github.com/BearNetwork-BRNKC/BearNetworkChain-Physics-Engine-Canonical-Definition"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "official",
+            "url": "https://bearnetwork.net/"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://digitalphysics.bearnetwork.net/#website",
+          "url": "https://digitalphysics.bearnetwork.net/",
+          "name": "BNC Digital Physics Knowledge Hub",
+          "publisher": {
+            "@id": "https://bearnetwork.net/#organization"
+          },
+          "description": "Technical specifications and knowledge base for the BearNetworkChain Physics-Informed Consensus Engine and BNES v1.3."
+        }
+      ]
     }
-    </script>
+  </script>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 </head>
