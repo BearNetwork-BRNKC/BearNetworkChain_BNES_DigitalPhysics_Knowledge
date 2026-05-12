@@ -1,6 +1,6 @@
 export const ui = {
   "app.title": "BearNetworkChain",
-  "app.subtitle": "Γ Physics Engine Knowledge Hub",
+  "app.subtitle": "Digital Physics Engine Knowledge Hub",
   "search.placeholder": "Search content...",
   "nav.github": "GitHub",
   "content.noResult": "No matching content found",

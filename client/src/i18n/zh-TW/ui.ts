@@ -1,6 +1,6 @@
 export const ui = {
   "app.title": "BearNetworkChain",
-  "app.subtitle": "Γ 物理引擎知識庫",
+  "app.subtitle": "數位物理引擎知識庫",
   "search.placeholder": "搜尋內容...",
   "nav.github": "GitHub",
   "content.noResult": "沒有找到相符的內容",
