@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm">
+      <header className="glass-nav">
         <div className="flex items-center justify-between h-16 px-4 md:px-6">
           <div className="flex items-center gap-4">
             <button

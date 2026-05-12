@@ -43,10 +43,10 @@ export default function Sidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:static inset-y-0 left-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 overflow-y-auto z-40 transition-transform duration-300 md:translate-x-0 ${
+        className={`fixed md:static inset-y-0 left-0 w-64 glass-nav border-r border-slate-200 dark:border-slate-800 overflow-y-auto z-40 transition-transform duration-300 md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ top: "80px", height: "calc(100vh - 80px)" }}
+        style={{ top: "64px", height: "calc(100vh - 64px)" }}
       >
         <nav className="p-4 space-y-2">
           {sections.map((section) => (
